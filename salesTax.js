@@ -34,23 +34,28 @@ function calculateSalesTax(salesData, taxRates) {
         let compName = salesData[company]["name"];
         output[compName] = {};
 
-        for(let i = 0; i < salesData[company]["sales"].length;i++){
-         totalSales += salesData[company]["sales"][i];
-        }
+          for(let i = 0; i < salesData[company]["sales"].length;i++){
+            totalSales += salesData[company]["sales"][i];
+          }
+
         output[compName]["totalSales"] = totalSales;
         output[compName]["totalTaxes"] = provTax(totalSales, salesData[company]["province"]);
-    } else {
+    }
+    else {
+
         let compName = salesData[company]["name"];
-        for(let i = 0; i < salesData[company]["sales"].length;i++){
-         totalSales += salesData[company]["sales"][i];
-        }
+
+          for(let i = 0; i < salesData[company]["sales"].length;i++){
+            totalSales += salesData[company]["sales"][i];
+          }
+
         output[compName]["totalSales"] += totalSales;
         output[compName]["totalTaxes"] += provTax(totalSales, salesData[company]["province"]);
     }
 
-    //console.log(dofunc(totalSales));
+
     totalSales = 0;
-    //console.log(typeof salesData[company]["sales"]);
+
   }
 
 return output;
@@ -60,9 +65,11 @@ return output;
 function provTax (sales, prov){
 if(prov == 'BC'){
   return Math.round(sales * 0.12);
-} else if (prov == 'AB'){
+}
+else if (prov == 'AB'){
   return Math.round(sales * 0.05);
-} else if(prov == 'SK'){
+}
+else if(prov == 'SK'){
   return Math.round(sales * 0.10);
 }
 
