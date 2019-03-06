@@ -38,7 +38,14 @@ function calculateSalesTax(salesData, taxRates) {
          totalSales += salesData[company]["sales"][i];
         }
         output[compName]["totalSales"] = totalSales;
-        output[compName]["totalTaxes"] = provTax(totalSales, salesData[company][province])
+        output[compName]["totalTaxes"] = provTax(totalSales, salesData[company]["province"]);
+    } else {
+        let compName = salesData[company]["name"];
+        for(let i = 0; i < salesData[company]["sales"].length;i++){
+         totalSales += salesData[company]["sales"][i];
+        }
+        output[compName]["totalSales"] += totalSales;
+        output[compName]["totalTaxes"] += provTax(totalSales, salesData[company]["province"]);
     }
 
     //console.log(dofunc(totalSales));
