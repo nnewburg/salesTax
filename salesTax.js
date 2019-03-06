@@ -21,3 +21,36 @@ var companySalesData = [
     sales: [ 500, 100 ]
   }
 ];
+
+function calculateSalesTax(salesData, taxRates) {
+  // create an object as output
+
+  let output = {}
+
+  //var are the objects within companySalesData
+  for(let company in salesData){
+    if(!output.hasOwnProperty(salesData[company]["name"])){
+      output[salesData[company]["name"]] = {};
+    }
+  }
+
+return output;
+
+}
+
+console.log(calculateSalesTax(companySalesData, salesTaxRates));
+
+//var results = calculateSalesTax(companySalesData, salesTaxRates);
+
+/* Expected Results:
+{
+  Telus: {
+    totalSales: 1300
+    totalTaxes: 144
+  },
+  Bombardier: {
+    totalSales: 800,
+    totalTaxes: 40
+  }
+}
+*/
