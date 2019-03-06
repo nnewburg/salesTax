@@ -26,15 +26,38 @@ function calculateSalesTax(salesData, taxRates) {
   // create an object as output
 
   let output = {}
+  let totalSales = 0;
 
-  //var are the objects within companySalesData
+  //company are the objects within companySalesData
   for(let company in salesData){
-    if(!output.hasOwnProperty(salesData[company]["name"])){
-      output[salesData[company]["name"]] = {};
+    if(!output[salesData[company]["name"]]){
+        let compName = salesData[company]["name"];
+        output[compName] = {};
+
+        for(let i = 0; i < salesData[company]["sales"].length;i++){
+         totalSales += salesData[company]["sales"][i];
+        }
+        output[compName]["totalSales"] = totalSales;
+        output[compName]["totalTaxes"] = provTax(totalSales, salesData[company][province])
     }
+
+    //console.log(dofunc(totalSales));
+    totalSales = 0;
+    //console.log(typeof salesData[company]["sales"]);
   }
 
 return output;
+
+}
+
+function provTax (sales, prov){
+if(prov == 'BC'){
+  return Math.round(sales * 0.12);
+} else if (prov == 'AB'){
+  return Math.round(sales * 0.05);
+} else if(prov == 'SK'){
+  return Math.round(sales * 0.10);
+}
 
 }
 
